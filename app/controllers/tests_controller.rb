@@ -19,10 +19,24 @@ class TestsController < ApplicationController
 		@test = Test.find(params[:id])
 	end
 
+	def edit
+		@test = Test.find(params[:id])
+	end
+
+	def update
+		@test = Test.find(params[:id])
+
+		if @test.update(test_params)
+			flash[:notice] = "Item was updated Successfully!"
+			redirect_to test_path(@test)
+		else
+			render 'edit'
+		end
+	end
+
 	private
 		def test_params
 			params.require( :test).permit( :name, :description)
 		end
 
-
-end
+	end
