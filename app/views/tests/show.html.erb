@@ -6,4 +6,6 @@
 <p>
 	Description: <%= @test.description %>
 </p>
-Here we go!
+
+<%= link_to "Edit this Item", edit_test_path(@test)%> |
+<%= link_to "List all Items", tests_path%>

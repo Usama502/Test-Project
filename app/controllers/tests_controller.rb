@@ -34,9 +34,13 @@ class TestsController < ApplicationController
 		end
 	end
 
+	def index
+		@tests = Test.all
+	end
+
 	private
 		def test_params
 			params.require( :test).permit( :name, :description)
 		end
 
-	end
+end
