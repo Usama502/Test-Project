@@ -1,5 +1,7 @@
 class TestsController < ApplicationController
 
+	before_action :set_item, only: [:edit, :show, :update, :destroy]
+
 	def new
 		@test = Test.new
 	end
@@ -16,16 +18,12 @@ class TestsController < ApplicationController
 	end
 
 	def show
-		@test = Test.find(params[:id])
 	end
 
 	def edit
-		@test = Test.find(params[:id])
 	end
 
 	def update
-		@test = Test.find(params[:id])
-
 		if @test.update(test_params)
 			flash[:notice] = "Item was updated Successfully!"
 			redirect_to test_path(@test)
@@ -36,6 +34,17 @@ class TestsController < ApplicationController
 
 	def index
 		@tests = Test.all
+	end
+
+	def destroy
+		@test.destroy
+		flash[:notice] = "Item was deleted Successfully!"
+
+		redirect_to tests_path
+	end
+
+	def set_item
+		@test = Test.find(params[:id])
 	end
 
 	private
